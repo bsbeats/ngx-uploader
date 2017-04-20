@@ -127,6 +127,11 @@ export class NgUploaderService {
         xhr.setRequestHeader(key, this.opts.customHeaders[key]);
       });
     }
+    
+    if (localStorage.getItem("currentUser") !== null) {
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.opts.authToken = currentUser.token;
+    }
 
     if (this.opts.authToken) {
       xhr.setRequestHeader('Authorization', `${this.opts.authTokenPrefix} ${this.opts.authToken}`);
